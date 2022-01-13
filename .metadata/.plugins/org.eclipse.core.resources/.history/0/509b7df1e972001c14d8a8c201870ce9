@@ -1,0 +1,13 @@
+package com.mindtree.SeleniumCertificationCourse;
+
+/**
+ * Hello world!
+ *
+ */
+public class Runner 
+{
+    public static void main( String[] args )
+    {
+        
+    }
+}

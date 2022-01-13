@@ -1,0 +1,52 @@
+package com.mindtree.SeleniumCertificationCourse;
+
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class Runner {
+	static WebDriver driver;
+
+	public static void main(String[] args) throws InterruptedException {
+
+		Runner runner = new Runner();
+		runner.setUp();
+		runner.testScenario1();
+
+		driver.quit();
+	}
+
+	public void setUp() throws InterruptedException {
+
+		System.setProperty("webdriver.chrome.driver", ".//drivers//chromedriver.exe");
+		driver = new ChromeDriver();
+		driver.get("https://www.lambdatest.com/selenium-playground/");
+		Thread.sleep(1000);
+		driver.manage().window().maximize();
+
+	}
+
+	@SuppressWarnings("deprecation")
+	public void testScenario1() {
+		driver.get("https://lambdatest.com/selenium-playground/");
+		driver.findElement(By.xpath("//a[@class='text-black text-size-14 hover:text-lambda-900 leading-relaxed']"))
+				.click();
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		String variable = "Welcome to Lambda Test";
+		driver.findElement(By.id("user-message")).sendKeys(variable);
+		System.out.println(variable);
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		driver.findElement(By.xpath("//button[@type='button']")).click();
+		String validateText = driver.findElement(By.id("message")).getText();
+		System.out.println(validateText);
+
+		if (variable.contains(validateText)) {
+			System.out.println("Test case is pass");
+		} else {
+			System.out.println("Test case is fail");
+		}
+	}
+
+}
